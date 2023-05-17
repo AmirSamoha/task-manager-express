@@ -35,9 +35,7 @@ editFormDOM.addEventListener('submit', async (e) => {
     const taskName = taskNameDOM.value
     const taskCompleted = taskCompletedDOM.checked
 
-    const {
-      data: { task },
-    } = await axios.patch(`/api/v1/tasks/${id}`, {
+    const {data: { task },} = await axios.patch(`/api/v1/tasks/${id}`, {
       name: taskName,
       completed: taskCompleted,
     })
@@ -45,7 +43,7 @@ editFormDOM.addEventListener('submit', async (e) => {
     const { _id: taskID, completed, name } = task
 
     taskIDDOM.textContent = taskID
-    taskNameDOM.value = name
+    taskName.value = name
     tempName = name
     if (completed) {
       taskCompletedDOM.checked = true
@@ -54,7 +52,7 @@ editFormDOM.addEventListener('submit', async (e) => {
     formAlertDOM.textContent = `success, edited task`
     formAlertDOM.classList.add('text-success')
   } catch (error) {
-    console.error(error)
+    alert(error)
     taskNameDOM.value = tempName
     formAlertDOM.style.display = 'block'
     formAlertDOM.innerHTML = `error, please try again`
